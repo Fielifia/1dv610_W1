@@ -4,47 +4,11 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
-const recipes = {
-    starter: {
-        meat: {
+const fs = require('node:fs')
+const path = require('node:path')
+let currentDirectory = process.cwd()
 
-        },
 
-        fish: {
-
-        },
-
-        chicken: {
-
-        },
-
-        veggie: {
-
-        },
-    },
-
-    mainCourse: {
-        meat: {
-
-        },
-
-        fish: {
-
-        },
-
-        chicken: {
-
-        },
-
-        veggie: {
-
-        },
-    },
-
-    dessert: {
-
-    }
-}
 
 function showMenu() {
     console.log('|||=== RECIPE MENU ===|||')
@@ -52,24 +16,82 @@ function showMenu() {
     console.log('2. Main Course')
     console.log('3. Dessert')
 
-    rl.question('Make your choice:', makeChoice)
+    rl.question('Make your choice:', makeCourseChoice)
 }
 
-function makeChoice(choice) {
+function makeCourseChoice(choice) {
     switch(choice.trim()) {
         case '1':
             console.log('Starter')
-            showMenu()
+            showStarterMenu()
             break
         case '2':
             console.log('Main Course')
-            showMenu()
+            showMainCourseMenu()
             break
         case '3':
             console.log('Dessert')
+            showDessertMenu()
+            break
+    }
+}
+function makeDessertChoice(choice) {
+    switch(choice.trim()) {
+        case '1':
+            console.log('Go back')
             showMenu()
             break
     }
+}
+
+function makeMainCourseChoice(choice) {
+    switch(choice.trim()) {
+        case '1':
+            console.log('Go back')
+            showMenu()
+            break
+    }
+}
+function makeStarterChoice(choice) {
+    switch(choice.trim()) {
+        case '1':
+            console.log('Go back')
+            showMenu()
+            break
+    }
+}
+
+function showStarterMenu() {
+    console.log('|||=== STARTER MENU ===|||')
+    console.log('1. Meat')
+    console.log('2. Chicken')
+    console.log('3. Fish')
+    console.log('4. Veggie')
+    console.log('5. Go back')
+
+    rl.question('Make your choice:', makeStarterChoice)
+}
+
+function showMainCourseMenu() {
+    console.log('|||=== MAIN COURSE MENU ===|||')
+    console.log('1. Meat')
+    console.log('2. Chicken')
+    console.log('3. Fish')
+    console.log('4. Veggie')
+    console.log('5. Go back')
+
+    rl.question('Make your choice:', makeMainCourseChoice)
+}
+function showDessertMenu() {
+    console.log('|||=== DESSERT MENU ===|||')
+
+    console.log('1. Go back')
+
+    rl.question('Make your choice:', makeDessertChoice)
+}
+
+function goBack() {
+
 }
 
 showMenu()
