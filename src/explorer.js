@@ -25,7 +25,7 @@ function showMenu() {
     showCategoryMenu(
         'MAIN',
         ['Starter', 'Main Course', 'Dessert'],
-        makeStarterChoice,
+        makeCourseChoice,
     )
 }
 
