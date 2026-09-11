@@ -1,97 +1,117 @@
 const readline = require('node:readline')
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
 })
 
 const fs = require('node:fs')
 const path = require('node:path')
 let currentDirectory = process.cwd()
 
+function showCategoryMenu(title, categories, handleChoice) {
+    console.log(`|||=== ${title} MENU ===|||`)
+
+    categories.forEach((category, index) => {
+        console.log(`${index + 1}. ${category}`)
+    })
+
+    console.log(`${categories.length + 1}, Go back`)
+
+    rl.question('Make your choice: ', handleChoice)
+}
 
 
 function showMenu() {
-    console.log('|||=== RECIPE MENU ===|||')
-    console.log('1. Starter')
-    console.log('2. Main Course')
-    console.log('3. Dessert')
-
-    rl.question('Make your choice:', makeCourseChoice)
-}
-
-function makeCourseChoice(choice) {
-    switch(choice.trim()) {
-        case '1':
-            console.log('Starter')
-            showStarterMenu()
-            break
-        case '2':
-            console.log('Main Course')
-            showMainCourseMenu()
-            break
-        case '3':
-            console.log('Dessert')
-            showDessertMenu()
-            break
-    }
-}
-function makeDessertChoice(choice) {
-    switch(choice.trim()) {
-        case '1':
-            console.log('Go back')
-            showMenu()
-            break
-    }
-}
-
-function makeMainCourseChoice(choice) {
-    switch(choice.trim()) {
-        case '1':
-            console.log('Go back')
-            showMenu()
-            break
-    }
-}
-function makeStarterChoice(choice) {
-    switch(choice.trim()) {
-        case '1':
-            console.log('Go back')
-            showMenu()
-            break
-    }
+    showCategoryMenu(
+        'MAIN',
+        ['Starter', 'Main Course', 'Dessert'],
+        makeStarterChoice,
+    )
 }
 
 function showStarterMenu() {
-    console.log('|||=== STARTER MENU ===|||')
-    console.log('1. Meat')
-    console.log('2. Chicken')
-    console.log('3. Fish')
-    console.log('4. Veggie')
-    console.log('5. Go back')
-
-    rl.question('Make your choice:', makeStarterChoice)
+    showCategoryMenu(
+        'STARTER',
+        ['Meat', 'Chicken', 'Fish', 'Veggie'],
+        makeStarterChoice
+    )
 }
 
 function showMainCourseMenu() {
-    console.log('|||=== MAIN COURSE MENU ===|||')
-    console.log('1. Meat')
-    console.log('2. Chicken')
-    console.log('3. Fish')
-    console.log('4. Veggie')
-    console.log('5. Go back')
-
-    rl.question('Make your choice:', makeMainCourseChoice)
+    showCategoryMenu(
+        'MAIN COURSE',
+        ['Meat', 'Chicken', 'Fish', 'Veggie'],
+        makeMainCourseChoice
+    )
 }
+
 function showDessertMenu() {
-    console.log('|||=== DESSERT MENU ===|||')
-
-    console.log('1. Go back')
-
-    rl.question('Make your choice:', makeDessertChoice)
+    showCategoryMenu(
+        'DESSERT',
+        ['Ice Cream', 'Cake', 'Pie'],
+        makeDessertChoice
+    )
 }
 
-function goBack() {
-
+function makeStarterChoice(choice) {
+    switch (choice.trim()) {
+    case '1':
+        console.log('Go back')
+        showMenu()
+        break
+    }
 }
+
+
+
+function makeCourseChoice(choice) {
+    switch (choice.trim()) {
+    case '1':
+        console.log('Starter')
+        showStarterMenu()
+        break
+    case '2':
+        console.log('Main Course')
+        showMainCourseMenu()
+        break
+    case '3':
+        console.log('Dessert')
+        showDessertMenu()
+        break
+    }
+}
+
+
+function makeMainCourseChoice(choice) {
+    switch (choice.trim()) {
+    case '1':
+        console.log('Go back')
+        showMenu()
+        break
+    case '1':
+        console.log('Starter')
+        showStarterMenu()
+        break
+    case '2':
+        console.log('Main Course')
+        showMainCourseMenu()
+        break
+    case '3':
+        console.log('Dessert')
+        showDessertMenu()
+        break
+    }
+}
+
+function makeDessertChoice(choice) {
+    switch (choice.trim()) {
+    case '1':
+        console.log('Go back')
+        showMenu()
+        break
+    }
+}
+
+function goBack() { }
 
 showMenu()
